@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transaction Ledger</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="page-header">
+      <p class="eyebrow">PERSONAL FINANCE</p>
+      <h1>Transaction ledger</h1>
+      <p class="subtitle">Accounts, balances, and a clear record of every movement.</p>
+    </header>
+
+    <section class="card" aria-labelledby="create-title">
+      <div class="card-heading"><div><p class="eyebrow">GET STARTED</p><h2 id="create-title">Create account</h2></div></div>
+      <form id="create-form" class="form-row">
+        <label class="field grow">Account holder name<input name="name" required placeholder="e.g. Alex Morgan"></label>
+        <button type="submit">Create account</button>
+      </form>
+      <p id="create-message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="card" aria-labelledby="balance-title">
+      <div class="card-heading"><div><p class="eyebrow">ACCOUNT</p><h2 id="balance-title">Balance</h2></div></div>
+      <form id="balance-form" class="form-row">
+        <label class="field grow">Account ID<input name="account_id" inputmode="numeric" required placeholder="Enter account ID"></label>
+        <button type="submit" class="secondary">Get balance</button>
+      </form>
+      <p id="balance-result" class="balance-result">—</p>
+      <p id="balance-message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="card" aria-labelledby="transaction-title">
+      <div class="card-heading"><div><p class="eyebrow">LEDGER ENTRY</p><h2 id="transaction-title">New transaction</h2></div></div>
+      <form id="transaction-form" class="form-grid">
+        <label class="field">Account ID<input name="account_id" inputmode="numeric" required placeholder="Account ID"></label>
+        <label class="field">Type<select name="type"><option value="credit">Credit</option><option value="debit">Debit</option></select></label>
+        <label class="field">Amount<input name="amount" type="number" min="0.01" step="0.01" required placeholder="0.00"></label>
+        <label class="field">Reference ID<input name="reference_id" required placeholder="Unique reference"></label>
+        <label class="field full">Description<input name="description" required placeholder="What is this transaction for?"></label>
+        <div class="full"><button type="submit">Add transaction</button></div>
+      </form>
+      <p id="transaction-message" class="message" aria-live="polite"></p>
+    </section>
+
+    <section class="card" aria-labelledby="history-title">
+      <div class="card-heading history-heading">
+        <div><p class="eyebrow">ACTIVITY</p><h2 id="history-title">Transaction history</h2></div>
+        <div class="segments" role="group" aria-label="Filter transactions">
+          <button class="segment active" type="button" data-type="">All</button>
+          <button class="segment" type="button" data-type="credit">Credit</button>
+          <button class="segment" type="button" data-type="debit">Debit</button>
+        </div>
+      </div>
+      <form id="history-form" class="form-row compact">
+        <label class="field grow">Account ID<input name="account_id" inputmode="numeric" required placeholder="Account ID"></label>
+        <button type="submit" class="secondary">Load history</button>
+      </form>
+      <p id="history-message" class="message" aria-live="polite"></p>
+      <div id="history-list" class="history-list"></div>
+      <div class="pagination"><button id="previous" class="secondary pill" type="button" disabled>Previous</button><span id="page-label">Page 1 of 0 · 0 records</span><button id="next" class="secondary pill" type="button" disabled>Next</button></div>
+    </section>
+
+    <section class="card" aria-labelledby="transfer-title">
+      <div class="card-heading"><div><p class="eyebrow">MOVE MONEY</p><h2 id="transfer-title">Transfer</h2></div></div>
+      <form id="transfer-form" class="form-grid">
+        <label class="field">From account<input name="from_account_id" inputmode="numeric" required placeholder="Source ID"></label>
+        <label class="field">To account<input name="to_account_id" inputmode="numeric" required placeholder="Destination ID"></label>
+        <label class="field">Amount<input name="amount" type="number" min="0.01" step="0.01" required placeholder="0.00"></label>
+        <label class="field">Reference ID<input name="reference_id" required placeholder="Transfer reference"></label>
+        <label class="field full">Description<input name="description" required placeholder="Transfer description"></label>
+        <div class="full"><button type="submit">Transfer</button></div>
+      </form>
+      <p id="transfer-message" class="message" aria-live="polite"></p>
+    </section>
+    <footer>Ledger API · Balances update with each successful transaction</footer>
+  </main>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
